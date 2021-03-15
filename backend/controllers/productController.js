@@ -44,19 +44,19 @@ exports.getSingleProduct = async (req, res, next) => {
     })
 }
 
-//    UPDATE    product = api/v1/products/:id
+//    UPDATE    product = api/v1/admin/product/:id
 exports.updateProducts = async (req, res, next) => {
 
-    const updateProducts = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id);
 
     if(!product){
         return res.status(404).json({
             success: false,
-            message: "nasa maling shop ka"
+            message: "nasa maling shop ka bui"
         })
     }
 
-    product = await Product.findByIdAndUpdate(req.paramsid, req.body, {
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
         useFindAndModify: false
@@ -65,5 +65,25 @@ exports.updateProducts = async (req, res, next) => {
     res.status(200).json({
         success: true,
         product
+    })
+}
+
+//     DELETE   product = api/v1/admin/products/:id
+exports.deleteProducts = async (req, res, next) => {
+
+    const product = await Product.findById(req.params.id);
+
+    if(!product){
+        return res.status(404).json({
+            success: false,
+            message: "nasa maling shop ka bui"
+        })
+    }
+
+    await product.remove();
+
+    res.status(200).json({
+        success: true,
+        message: ('Product is deleted')
     })
 }
