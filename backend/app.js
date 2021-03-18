@@ -11,11 +11,13 @@ app.use(cookieParser());
 const products = require('./routes/product')
 const reservations = require('./routes/reservation')
 const auth = require('./routes/auth')
+const order = require('./routes/order')
 
 
 app.use('/api/v1', products)
 app.use('/api/v1', reservations)
 app.use('/api/v1', auth)
+app.use('/api/v1', order)
 
 
 // middleware to handle errors
